@@ -171,7 +171,7 @@ function App() {
         {myvar3 && (
           <div id={"metamaskgetbalance"}>
             <Button type="primary" onClick={getBalance}>
-              Get Balance
+              Get Your Wallet Balance
             </Button>
           </div>
         )}
