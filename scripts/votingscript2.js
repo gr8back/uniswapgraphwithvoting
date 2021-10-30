@@ -14,6 +14,8 @@ async function main() {
     "0x6c20000000000000000000000000000000000000000000000000000000000000",
   ]);
 
+      const myexamplesol = await deploy("Test")
+
     const [addr1] = await ethers.getSigners();
     console.log("your addr1 is " + JSON.stringify(addr1))
    console.log("Ballot deployed to:", voter.address);

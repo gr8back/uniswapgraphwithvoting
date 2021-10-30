@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity 0.8.4;
 import "hardhat/console.sol";
 
@@ -24,6 +25,7 @@ contract Ballot {
 
 //    bytes32 happy = 0x6c00000000000000000000000000000000000000000000000000000000000000;
 //    bytes32 lappy = 0x6c10000000000000000000000000000000000000000000000000000000000000;
+    //   "0x6c00000000000000000000000000000000000000000000000000000000000000","0x6c10000000000000000000000000000000000000000000000000000000000000"
 
     bytes32[] public proposalNames;
 
@@ -104,6 +106,7 @@ contract Ballot {
         require(!sender.voted, "already voted");
         sender.weight += 1;
         sender.voted = true;
+        hardhataccounts.push(msg.sender);
         sender.vote = proposal;
         console.log("sender weight is ", sender.weight);
         proposals[proposal].voteCount += sender.weight;

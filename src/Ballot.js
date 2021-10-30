@@ -47,9 +47,18 @@ function MyBallot(props) {
       console.log("voting failed " + JSON.stringify(err));
       var twoerror = mylogger.makeError(err);
       console.log(twoerror);
-      console.log(err.data.message);
-      toastr.error("ERRROR " + err.data.message);
-      // mylogger.throwError();
+
+      console.log(err.error.message)
+      // err.data ? toastr.error("ERROR " + err.data.message) : toastr.error("No right to vote")
+      if (err.data) {
+        if (err.data.message) {
+          toastr.error(err.data.message)
+        }} else if (err.error) {
+          toastr.error(err.error.message)
+        } else  {
+          toastr.error("Did you already vote")
+        }
+
     }
   }
 

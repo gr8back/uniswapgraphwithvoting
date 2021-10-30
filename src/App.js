@@ -32,11 +32,15 @@ function App() {
     console.log("balance accounts");
     var provider = await detectEthereumProvider();
     var web3 = new Web3(provider);
+    await window.ethereum.enable();
     var myactzero = await web3.eth.getAccounts();
     console.log("your account " + myactzero);
     var mybal = await web3.eth.getBalance(myactzero[0]);
     setmyvar(mybal);
   }
+
+
+
 
   async function refreshscreen() {
               window.location.reload();
@@ -96,7 +100,6 @@ function App() {
       }
 
 
-
       try {
         for (var i = 0; i < myaccounts.length; i++) {
           var myexcept = await contract.votedstatus(myaccounts[i]);
@@ -113,6 +116,16 @@ function App() {
     async function loadAccounts() {
       console.log("logging accounts");
       var provider = await detectEthereumProvider();
+
+          provider.on("network", (newNetwork, oldNetwork) => {
+        // When a Provider makes its initial connection, it emits a "network"
+        // event with a null oldNetwork along with the newNetwork. So, if the
+        // oldNetwork exists, it represents a changing network
+            console.log("your networks " + newNetwork + " " + oldNetwork)
+        if (oldNetwork) {
+            window.location.reload();
+        }
+    });
 
       if (provider !== window.ethereum) {
         console.error("Do you have multiple wallets installed?");
@@ -152,7 +165,8 @@ function App() {
         </div>
         <div id={"connectmetamask"}>
           Your metamask address : {myvar2} <br />
-          Balance : {myvar}
+          Balance : {myvar} in gwei
+          <div>Balance : {myvar / 1000000000000000000} in Ether</div>
         </div>
         {myvar3 && (
           <div id={"metamaskgetbalance"}>
