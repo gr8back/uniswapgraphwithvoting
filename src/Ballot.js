@@ -185,7 +185,7 @@ function MyBallot(props) {
     setmyvar8(event.target.value);
   };
 
-  console.log("props " + JSON.stringify(props));
+
 
   return (
     <div className="App">

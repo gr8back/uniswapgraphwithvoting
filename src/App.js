@@ -24,9 +24,41 @@ function App() {
   const [myvar5, setmyvar5] = useState("");
   const [state, setState] = useState({});
 
-  var provider3 = new ethers.providers.Web3Provider(window.ethereum);
-  const signer3 = provider3.getSigner();
-  var contract = new ethers.Contract(mycontractconnect, Ballot.abi, signer3);
+
+    try {
+      var provider3 = new ethers.providers.Web3Provider(window.ethereum);
+      const signer3 = provider3.getSigner();
+      var contract = new ethers.Contract(mycontractconnect, Ballot.abi, signer3);
+        } catch (err) {console.log("no metamask")}
+
+useEffect(()=> {
+
+      async function loadaccounts() {
+        var provider = await detectEthereumProvider();
+        if (provider) {
+          provider.on("network", (newNetwork, oldNetwork) => {
+            console.log("your networks " + newNetwork + " " + oldNetwork)
+        if (oldNetwork) {
+            window.location.reload();
+        }
+    });
+
+      if (provider !== window.ethereum) {
+        console.error("Do you have multiple wallets installed?");
+        setmyvar(false);
+      }
+
+      if (provider) {
+        var web3 = new Web3(provider);
+        var myactzero = await web3.eth.getAccounts();
+        setmyvar2(myactzero);
+        setmyvar3(true);
+        console.log("metamask account received");
+      } else {
+        setmyvar2("Please select a crypto wallet to continue");
+      }}}
+      loadaccounts()
+},[])
 
   async function getBalance() {
     console.log("balance accounts");
@@ -112,38 +144,38 @@ function App() {
     findout();
   }, [myvar3]);
 
-  useEffect(() => {
-    async function loadAccounts() {
-      console.log("logging accounts");
-      var provider = await detectEthereumProvider();
-
-          provider.on("network", (newNetwork, oldNetwork) => {
-        // When a Provider makes its initial connection, it emits a "network"
-        // event with a null oldNetwork along with the newNetwork. So, if the
-        // oldNetwork exists, it represents a changing network
-            console.log("your networks " + newNetwork + " " + oldNetwork)
-        if (oldNetwork) {
-            window.location.reload();
-        }
-    });
-
-      if (provider !== window.ethereum) {
-        console.error("Do you have multiple wallets installed?");
-        setmyvar(false);
-      }
-
-      if (provider) {
-        var web3 = new Web3(provider);
-        var myactzero = await web3.eth.getAccounts();
-        setmyvar2(myactzero);
-        setmyvar3(true);
-        console.log("metamask account received");
-      } else {
-        setmyvar2("Please select a crypto wallet to continue");
-      }
-    }
-    loadAccounts();
-  }, []);
+  // useEffect(() => {
+  //   async function loadAccounts() {
+  //     console.log("logging accounts");
+  //     var provider = await detectEthereumProvider();
+  //       if (provider) {
+  //         provider.on("network", (newNetwork, oldNetwork) => {
+  //       // When a Provider makes its initial connection, it emits a "network"
+  //       // event with a null oldNetwork along with the newNetwork. So, if the
+  //       // oldNetwork exists, it represents a changing network
+  //           console.log("your networks " + newNetwork + " " + oldNetwork)
+  //       if (oldNetwork) {
+  //           window.location.reload();
+  //       }
+  //   });
+  //
+  //     if (provider !== window.ethereum) {
+  //       console.error("Do you have multiple wallets installed?");
+  //       setmyvar(false);
+  //     }
+  //
+  //     if (provider) {
+  //       var web3 = new Web3(provider);
+  //       var myactzero = await web3.eth.getAccounts();
+  //       setmyvar2(myactzero);
+  //       setmyvar3(true);
+  //       console.log("metamask account received");
+  //     } else {
+  //       setmyvar2("Please select a crypto wallet to continue");
+  //     }
+  //   }}
+  //   loadAccounts();
+  // }, []);
 
   function setaccount(acct) {
     console.log("settting account to " + acct);
@@ -152,17 +184,11 @@ function App() {
 
   return (
     <div className={"mycontainer"}>
-      <div className={"maingrid"}>
-        <div
-          style={{
-            gridColumn: "1 / 4",
-            gridRow: 1,
-            fontSize: "30pt",
-            textAlign: "center",
-          }}
-        >
+
+        <div className={"secondgrid"}>
           <div className={"headbackground"}>Voting Machine</div>
         </div>
+      <div className={"maingrid"}>
         <div id={"connectmetamask"}>
           Your metamask address : {myvar2} <br />
           Balance : {myvar} in gwei
@@ -176,24 +202,25 @@ function App() {
           </div>
         )}
         {!myvar3 && (
-          <div style={{ gridRow: 2 }}>
+          <div id={'connectbutton'}>
             <Yourweb3modal />
           </div>
         )}
         <div id={"metamaskgetbalance"}><Button type="primary" onClick={()=>refreshscreen()}>
               Refresh
-            </Button></div>
-        <div style={{ gridColumn: "3", gridRow: 3 }}>
-          {myvar3 && (
+            </Button>
+        </div>
+        <div className={'ballotmachinestyle'}>
+
             <BallotMachine
               state={state}
               contract={mycontractconnect}
               selacct={myvar4}
             />
-          )}
+
         </div>
 
-        {myvar3 && (
+
           <div className={"acctlist"}>
             {" "}
             <h1>Sandbox of Accounts</h1>
@@ -256,7 +283,7 @@ function App() {
               })}
             </div>
           </div>
-        )}
+
       </div>
     </div>
   );

@@ -10,10 +10,25 @@
 
 .maingrid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 40% 30% 30%);
         gap: 10px;
         grid-auto-rows: minmax(50px, auto);
         background-color: lightcyan;
+
+}
+
+#connectbutton {padding: 50px;}
+
+.secondgrid {
+            grid-column: 1/4;
+            grid-row: 1;
+            font-size: 30p;
+            text-align: center;
+}
+
+.ballotmachinestyle {
+    grid-column: 3;
+    grid-row: 3;
 }
 
 body {
@@ -38,6 +53,7 @@ body {
     border-radius: 30px;
   padding: 30px;
     margin: 20px;
+    word-wrap: break-word;
 }
 
 .checkmarksize {
