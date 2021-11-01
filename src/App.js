@@ -197,7 +197,7 @@ useEffect(()=> {
         {myvar3 && (
           <div id={"metamaskgetbalance"}>
             <Button type="primary" onClick={getBalance}>
-              Get Your Wallet Balance
+              Wallet Balance
             </Button>
           </div>
         )}
