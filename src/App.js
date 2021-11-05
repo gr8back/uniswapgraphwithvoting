@@ -198,7 +198,7 @@ useEffect(()=> {
           <div className={"headbackground"}>Voting Machine</div>
         </div>
             <div id={'linktopagetwo'}>
-        <Link className='link' to="/">BDP Info</Link>
+        <Button><Link className='link' to="/">BDP Info</Link></Button>
       </div>
       <div className={"maingrid"}>
         <div id={"connectmetamask"}>
@@ -218,19 +218,11 @@ useEffect(()=> {
             <Yourweb3modal />
           </div>
         )}
-        <div id={"metamaskgetbalance"}><Button type="primary" onClick={()=>refreshscreen()}>
+        <div id={"metamaskgetbalance2"}><Button type="primary" onClick={()=>refreshscreen()}>
               Refresh
             </Button>
         </div>
-        <div className={'ballotmachinestyle'}>
 
-            <BallotMachine
-              state={state}
-              contract={mycontractconnect}
-              selacct={myvar4}
-            />
-
-        </div>
 
 
           <div className={"acctlist"}>
@@ -248,12 +240,13 @@ useEffect(()=> {
             </div>
                 </div>
             <hr />
-            <div>
+
               <div className={"header-grid-item"}>
                 <div style={{ gridColumn: "1/3" }}>Click to change</div>
                 <div>Has Right to Vote</div>
                 <div>Voted?</div>
               </div>
+            <div>
               {myaccounts.map((object, i) => {
                 return (
                   <div className={"test-numbers-grid-item"} key={i}>
@@ -297,6 +290,15 @@ useEffect(()=> {
           </div>
 
       </div>
+              <div className={'ballotmachinestyle'}>
+
+            <BallotMachine
+              state={state}
+              contract={mycontractconnect}
+              selacct={myvar4}
+            />
+
+        </div>
     </div>
   );
 }

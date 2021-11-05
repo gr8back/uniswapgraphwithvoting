@@ -122,23 +122,23 @@ function BDP() {
                 <div className={"tokendata"}>decimals:</div>
                 <div> {decimals}</div>
                 <div className={"tokendata"}>derivedETH:</div>
-                <div> {derivedETH}</div>
+                <div> {parseFloat(derivedETH).toPrecision(2)}</div>
                 <div className={"tokendata"}>tradeVolumeUSD:</div>
-                <div>{tradeVolumeUSD}</div>
+                <div>{parseFloat(tradeVolumeUSD).toFixed(2)}</div>
                 <div className={"tokendata"}>totalLiquidity:</div>
-                <div> {totalLiquidity}</div>
+                <div> {parseFloat(totalLiquidity).toFixed(2)}</div>
                 <div className={"pairinfo"}>Reserve0:</div>
-                <div> {reserve0}</div>
+                <div> {parseFloat(reserve0).toFixed(2)}</div>
                 <div className={"pairinfo"}>Reserve1:</div>
-                <div> {reserve1}</div>
+                <div> {parseFloat(reserve1).toFixed(2)}</div>
                 <div className={"pairinfo"}>ReserveUSD:</div>
-                <div> {reserveUSD}</div>
+                <div> {parseFloat(reserveUSD).toFixed(2)}</div>
                 <div className={"pairinfo"}>BDP in ETH:</div>
-                <div> {token1Price}</div>
+                <div> {parseFloat(token1Price).toFixed(2)}</div>
                 <div className={"pairinfo"}>Reserved ETH:</div>
-                <div> {trackedReserveETH}</div>
+                <div> {parseFloat(trackedReserveETH).toFixed(2)}</div>
                 <div className={"pairinfo"}>Trade Volume USD:</div>
-                <div> {tradeVolumeUSD}</div>
+                <div> {parseFloat(tradeVolumeUSD).toFixed(2)}</div>
                 <div className={"pairinfo"}>Transaction Count:</div>
                 <div> {txCount}</div>
                 <div>ETH price: </div>
