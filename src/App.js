@@ -11,6 +11,8 @@ import "./toastr2.css";
 import "./votebooth.jpeg";
 import Ballot from "./artifacts/contracts/Ballot.sol/Ballot.json";
 import MyImage from "./64px-Checkmark_green.svg.png";
+import {ChainId, Fetcher, Token, WETH} from "@uniswap/sdk";
+import {Link} from "react-router-dom";
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../../.env") });
 
@@ -41,7 +43,13 @@ useEffect(()=> {
         if (oldNetwork) {
             window.location.reload();
         }
+
     });
+
+
+
+
+
 
       if (provider !== window.ethereum) {
         console.error("Do you have multiple wallets installed?");
@@ -54,6 +62,7 @@ useEffect(()=> {
         setmyvar2(myactzero);
         setmyvar3(true);
         console.log("metamask account received");
+
       } else {
         setmyvar2("Please select a crypto wallet to continue");
       }}}
@@ -188,6 +197,9 @@ useEffect(()=> {
         <div className={"secondgrid"}>
           <div className={"headbackground"}>Voting Machine</div>
         </div>
+            <div id={'linktopagetwo'}>
+        <Link className='link' to="/">BDP Info</Link>
+      </div>
       <div className={"maingrid"}>
         <div id={"connectmetamask"}>
           Your metamask address : {myvar2} <br />
@@ -197,7 +209,7 @@ useEffect(()=> {
         {myvar3 && (
           <div id={"metamaskgetbalance"}>
             <Button type="primary" onClick={getBalance}>
-              Wallet Balance :
+              Wallet Balance
             </Button>
           </div>
         )}
