@@ -202,7 +202,7 @@ useEffect(()=> {
       </div>
       <div className={"maingrid"}>
         <div id={"connectmetamask"}>
-          Your metamask address : {myvar2} <br />
+          Your Metamask address : {myvar2} <br />
           Balance : {myvar} in gwei
           <div>Balance : {myvar / 1000000000000000000} in Ether</div>
         </div>
