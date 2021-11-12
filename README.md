@@ -1,8 +1,11 @@
-# Web3 Voting Machine
+# GraphQL Uniswap Fetch and Web3 Voting Machine  
 This is an example project using Web3, metamask and hardhat.  Once connected to your metamask chrome extension, this
 Dapp allows you to interact with the sample accounts provided by Hardhat.  Example actions include
 giving the right to vote, voting, tallying the vote and resetting the machine.
 
+There is also a Apollo GraphQL query that shows example data from the Uniswap endopoint on thegraph.
+
+Project uses react-router for navigation.
 
 ## Available Scripts
 To use this repo, clone the repo in the usual way, and then open three terminal windows.  The first
